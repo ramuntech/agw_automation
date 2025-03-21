@@ -1,0 +1,165 @@
+{"main": {"children": [
+    {
+        "has_children": true,
+        "children": {
+            "menu_link_content:93e55d03-cfb8-49ae-ae37-88e7368bbc18": {
+                "link": "/shared-services",
+                "weight": "-49",
+                "title": "Shared Services "
+            },
+            "menu_link_content:b260d6f3-44bf-47c1-a224-d245ec4f28a8": {
+                "link": "/additional-resources",
+                "weight": "-43",
+                "title": "Additional Resources"
+            },
+            "menu_link_content:4f856424-0d66-4504-b237-6da954d4b33f": {
+                "link": "/category-management",
+                "weight": "-50",
+                "title": "Category Management"
+            },
+            "menu_link_content:f6e23acb-8290-42cc-95fa-bbaa303c1953": {
+                "link": "https://acquisitiongateway.gov/additional-resources/resources/4305",
+                "weight": "-46",
+                "title": "CSAW"
+            },
+            "menu_link_content:9ae731cd-5d03-4c07-9adb-7804849ce150": {
+                "link": "/periodic-table",
+                "weight": "-44",
+                "title": "Periodic Table of Acquisition Innovations (PTAI)"
+            },
+            "menu_link_content:c94ca47b-0588-45a6-adae-2928f4eac39b": {
+                "link": "/hi-def",
+                "weight": "-48",
+                "title": "Hi -Def Initiative"
+            },
+            "menu_link_content:67d9cc74-2320-4089-9968-c132c709a063": {
+                "link": "https://acquisitiongateway.gov/additional-resources/resources/4372",
+                "weight": "-45",
+                "title": "OFPP InReach "
+            }
+        },
+        "weight": "-50",
+        "title": "Government-wide Initiatives"
+    },
+    {
+        "has_children": true,
+        "children": {
+            "menu_link_content:054d916b-1861-4f1b-bbeb-c35bce66f4d4": {
+                "link": "/calendar",
+                "weight": "-43",
+                "title": "Events Calendar"
+            },
+            "menu_link_content:61e4728a-12d1-4846-8c6c-f1f230859208": {
+                "link": "/solutions",
+                "weight": "-47",
+                "title": "Solution Finder"
+            },
+            "menu_link_content:1ecee414-33ba-4ff6-adad-a12656a0e6fc": {
+                "link": "/procurementcopilot",
+                "weight": "-50",
+                "title": "Procurement Co-Pilot"
+            },
+            "menu_link_content:cff4886d-76ca-4c4a-ab79-337377c0e9ab": {
+                "link": "https://acquisitiongateway.gov/ptai-finder",
+                "weight": "-45",
+                "title": "PTAI Finder Tool "
+            },
+            "menu_link_content:ed18819f-2eff-4261-a2cc-e608fd9ed9a9": {
+                "link": "/documents",
+                "weight": "-46",
+                "title": "Document Library"
+            },
+            "menu_link_content:ee7a0776-4490-4d2b-9b77-d90dc9d31c13": {
+                "link": "/hideftracker",
+                "weight": "-49",
+                "title": "Hi-Def Use Case Tracker"
+            },
+            "menu_link_content:a1553c82-1c9b-4080-9b11-969380821c4f": {
+                "link": "/success-stories-center",
+                "weight": "-44",
+                "title": "Success Stories Finder "
+            },
+            "menu_link_content:1dc995fe-b52f-4572-af5b-c883338d1408": {
+                "link": "/doormat/resources/faq",
+                "weight": "-43",
+                "title": "Frequently Asked Questions"
+            },
+            "menu_link_content:680c1ae9-2f71-41c2-846c-de4f7a3bc8c1": {
+                "link": "/forecast",
+                "weight": "-48",
+                "title": "Forecast of Contracting Opportunities"
+            }
+        },
+        "weight": "-49",
+        "title": "Tools & Resources"
+    },
+    {
+        "has_children": true,
+        "children": {
+            "menu_link_content:a8e654f1-1da5-42c4-989d-0b7df8a87358": {
+                "link": "/doormat/resources/content-managers-resources",
+                "weight": "-49",
+                "title": "Content Management Training"
+            },
+            "menu_link_content:56558a04-983d-4626-9a2d-f1abedb9660b": {
+                "link": "https://www.youtube.com/playlist?list=PLvdwyPgXnxxXoAquHynZ-OKOggp7E05cd",
+                "weight": "-48",
+                "title": "AG YouTube Demo Videos"
+            },
+            "menu_link_content:23046fe4-e4bc-4ac0-af04-95325dda282c": {
+                "link": "https://www.gsa.gov/about-us/events-and-training/our-training-programs/training-for-federal-employees/acquisition-training-for-the-real-world",
+                "weight": "-47",
+                "title": "Training for the Real World"
+            },
+            "menu_link_content:2de6a71e-801a-4e14-bda3-3c55390e103d": {
+                "link": "/category-management/resources/4150",
+                "weight": "-50",
+                "title": "Category Management Training"
+            }
+        },
+        "weight": "-48",
+        "title": "Training"
+    },
+    {
+        "has_children": true,
+        "children": {
+            "menu_link_content:ab73bd42-e0ad-4bef-9bb0-3a90b57a9065": {
+                "link": "http://www.gsa.gov",
+                "weight": "-49",
+                "title": "GSA"
+            },
+            "menu_link_content:db2039d7-1dad-4c0e-91d6-710eadea7645": {
+                "link": "https://buy.gsa.gov/pricing/igce/landing",
+                "weight": "-44",
+                "title": "IGCE "
+            },
+            "menu_link_content:b51c7ac2-54c5-4d1e-9695-4eacfad4a026": {
+                "link": "https://buy.gsa.gov/documents",
+                "weight": "-45",
+                "title": "Wireless RFQ "
+            },
+            "menu_link_content:c1e76019-e3df-4c98-b6c0-ecdeed114f4c": {
+                "link": "https://buy.gsa.gov/pricing/",
+                "weight": "-47",
+                "title": "Prices Paid Portal"
+            },
+            "menu_link_content:bb672edc-89c2-4c35-b6f2-27d04eef44de": {
+                "link": "https://www.gsa.gov/about-us/organization/federal-acquisition-service/customer-and-stakeholder-engagement/market-research-as-a-service-mras",
+                "weight": "-43",
+                "title": "Market Research As a Service"
+            },
+            "menu_link_content:7fe32e42-4919-4182-a512-3ccc4f3719bc": {
+                "link": "https://www.ebuy.gsa.gov/ebuyopen/",
+                "weight": "-48",
+                "title": "eBuy Open "
+            },
+            "menu_link_content:50dba24b-23d4-497f-8e56-47e74ce1ed86": {
+                "link": "https://buy.gsa.gov/fas-policy",
+                "weight": "-46",
+                "title": "FAS Policy Library "
+            }
+        },
+        "weight": "-47",
+        "title": "External Resources"
+    }
+]}}
