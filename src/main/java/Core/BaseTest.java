@@ -27,7 +27,7 @@ public class BaseTest {
     public void beforeTestMethos(Method method) {
         Test test = method.getAnnotation(Test.class);
         String testName = test.testName();
-        ReportUtil.addTestToReport(testName);
+        //ReportUtil.addTestToReport(testName);
         launchApplication();
     }
 
@@ -60,7 +60,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().window().maximize();
         driver.get(Config.getEnvData("appurl"));
-        ReportUtil.PASS(driver, Config.getEnvData("appurl") + " applicaiton is launched");
+        //ReportUtil.PASS(driver, Config.getEnvData("appurl") + " applicaiton is launched");
 
     }
 }

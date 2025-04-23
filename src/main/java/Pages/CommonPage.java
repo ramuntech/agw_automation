@@ -151,7 +151,8 @@ public class CommonPage extends BasePage {
     }
 
     public JSONObject captureResponseFromDevTools(String endpoint) throws InterruptedException {
-        final JSONObject[] capturedResponse = new JSONObject[1];
+        //final JSONObject[] capturedResponse = new JSONObject[];
+        final List<JSONObject> capturedResponse = new ArrayList<>();
         DevTools devTools = ((ChromeDriver) driver).getDevTools();
         driver.navigate().refresh();
         devTools.createSession();
@@ -163,14 +164,18 @@ public class CommonPage extends BasePage {
         devTools.addListener(Network.responseReceived(), responseReceived -> {
             Response response = responseReceived.getResponse();
             String url = response.getUrl();
-
+            if(url.contains("/api")) {
+                System.out.println("Captured API: " + url);
+            }
             if (url.contains(endpoint) && url.contains("/api")) {
                 System.out.println("Captured Response URL: " + url);
                 try {
                     Network.GetResponseBodyResponse bodyResponse = devTools.send(Network.getResponseBody(responseReceived.getRequestId()));
                     String responseBody = bodyResponse.getBody();
+                    System.out.println("Response Body: " + responseBody);
                     if (responseBody != null && !responseBody.isEmpty()) {
-                        capturedResponse[0] = new JSONObject(responseBody);
+                        //capturedResponse[0] = new JSONObject(responseBody);
+                        capturedResponse.add(new JSONObject(responseBody));
                     } else {
                         System.out.println("Response body is empty.");
                     }
@@ -180,9 +185,10 @@ public class CommonPage extends BasePage {
             }
         });
         driver.navigate().refresh();
-        Thread.sleep(5000);
-
-        return capturedResponse[0];
+        Thread.sleep(10000);
+        //Assert.assertNotNull(capturedResponse[0]);
+        //return capturedResponse[0];
+        return capturedResponse.get(0);
     }
 
 }
