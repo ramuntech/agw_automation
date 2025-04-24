@@ -1,0 +1,63 @@
+{
+  "collection": [
+    {
+      "menu": "Government-wide Initiatives",
+      "option" : "Category Management",
+      "endpoint" : "/category-management"
+    },
+    {
+      "menu": "Government-wide Initiatives",
+      "option" : "Shared Services ",
+      "endpoint" : "/shared-services"
+    },
+    {
+      "menu": "Government-wide Initiatives",
+      "option" : "Hi -Def Initiative",
+      "endpoint" : "/hi-def"
+    },
+    {
+      "menu": "Government-wide Initiatives",
+      "option" : "Periodic Table of Acquisition Innovations (PTAI)",
+      "endpoint" : "/periodic-table"
+    },
+    {
+      "menu": "Government-wide Initiatives",
+      "option" : "Additional Resources",
+      "endpoint" : "/additional-resources"
+    }
+  ],
+  "result": [
+    {
+      "menu": "Tools & Resources",
+      "option" : "Hi-Def Use Case Tracker",
+      "endpoint" : "/hideftracker"
+    },
+    {
+      "menu": "Tools & Resources",
+      "option" : "Forecast of Contracting Opportunities",
+      "endpoint" : "/forecast"
+    },
+    {
+      "menu": "Tools & Resources",
+      "option" : "Solution Finder",
+      "endpoint" : "/solutions"
+    },
+    {
+      "menu": "Tools & Resources",
+      "option" : "Document Library",
+      "endpoint" : "/documents"
+    },
+    {
+      "menu": "Tools & Resources",
+      "option" : "Success Stories Finder ",
+      "endpoint" : "/success-stories-center"
+    }
+  ],
+  "portfolio": [
+    {
+      "menu": "Tools & Resources",
+      "option" : "Procurement Co-Pilot",
+      "endpoint" : "portfolio"
+    }
+  ]
+}

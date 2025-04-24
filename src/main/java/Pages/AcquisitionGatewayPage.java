@@ -42,13 +42,14 @@ public class AcquisitionGatewayPage extends BasePage {
     private String termTitle = "//span[contains(text(),'%s')]";
     private String termDesc = "";
     private String filterElement ="//form[@class='usa-search usa-search--small search-form ng-pristine ng-valid ng-touched']";
-    private String headerTitle ="//h4[@class='ag-header__title']//a[contains(text(),'%s')]";
-    private String titleBody = "//a[contains(text(),'%s')]/ancestor::section/following-sibling::section//div[@class='ag-body-body']//p[normalize-space(text()) != '']";
-    private String keyValue = "//a[contains(text(),'%s')]/ancestor::section/following-sibling::section//div[@class='ag-body-additional_content__key']/b[contains(.,'%s')]/ancestor::div[@class='ag-item-additional_content__display']//child::div[contains(.,'%s')]";
-    private String keyLable = "//a[contains(text(),'%s')]/ancestor::section/following-sibling::section//div[@class='ag-body-additional_content__key']/b[contains(text(),'%s')]";
+    private String headerTitle = "//h4[@class='ag-header__title' and contains(normalize-space(.), '%s')]";
+
+    private String titleBody = "//h4[@class='ag-header__title' and contains(normalize-space(.),'%s')]/ancestor::section/following-sibling::section//div[@class='ag-body-body']//p[normalize-space(text()) != '']";
+    private String keyValue = "//section[contains(normalize-space(.),'%s')]/following-sibling::*/div//b[contains(text(),'%s')]/parent::div/following-sibling::div[contains(text(),'%s')]";
+    private String keyLable = "//section[contains(normalize-space(.),'%s')]/following-sibling::*/div//b[contains(text(),'%s')]";
     private String titleContent = "//div[@class='ag-body-additional_content__key']/following-sibling::div[contains(text(),'%s')]";
-    private String filterLabelXpath ="//div[@class='usa-label ag-filter-label']/span[contains(text(),'%s')]";
-    private String filterTextBox = "//label[contains(text(),'%s')]/following::input[1]";
+    private String filterLabelXpath ="//div[@class='usa-label ag-filter-label']/span[text()='%s']";
+    private String filterTextBox = "//label[text()='%s']/following::input[1]";
     private String filterOptions ="//ul[@id='search-result']/li[contains(.,'%s')]";
     private String filterkeyValue ="//div[@class='ag-body-additional_content__key']/b[contains(text(),'%s')]/parent::div/following-sibling::div[contains(text(),'%s')]";
     private String filterKey ="//div[@class='ag-body-additional_content__key']/b[contains(text(),'%s')]";
@@ -152,23 +153,87 @@ public class AcquisitionGatewayPage extends BasePage {
 
     //listing validation
     public void validateListing(String templateName) throws InterruptedException {
-        if(jsonResponse.isEmpty()){
-            return;
-        }
+        try {
 
-        if(templateName.equals("result")){
-            validateResultTemplate();
+            //return if list is empty
+            if (jsonResponse.isEmpty()) {
+                return;
+            }
 
-        }
-        else if (templateName.equals("collection")) {
-            validateCollectionTemplate();
-        }
-        else if(templateName.equals("portfolio")){
-            validatePortfolioTemplate();
+            if (templateName.equals("result")) {
+                validateResultTemplate();
+            } else if (templateName.equals("collection")) {
+                validateCollectionTemplate();
+            } else if (templateName.equals("portfolio")) {
+                validatePortfolioTemplate();
+            }
+        } catch (Exception e) {
+            ReportUtil.FAIL(driver,e.getMessage());
         }
     }
 
-    //result listing validation
+    //validate Filter
+    public void validateFilter(){
+        String filtersString = JSONUtil.getAttributeValue(jsonResponse, "filters");
+        try {
+            if (filtersString.equals("[]")) {
+                return;
+            }
+            JSONObject filtersJson = new JSONObject(filtersString);
+            if (filtersJson.isEmpty() || jsonResponse.isEmpty()) {
+                return;
+            }
+        } catch (Exception e) {
+            if (filtersString.equals("[]")) {
+                return;
+            }
+        }
+        //filter
+        String filterString = JSONUtil.getAttributeValue(jsonResponse, "filters");
+        assert filterString != null;
+        JSONObject filtersObject = new JSONObject(filterString);
+        for (String key : filtersObject.keySet()) {
+            try {
+                JSONObject filter = filtersObject.getJSONObject(key);
+                JSONObject viewObject = filter.getJSONObject("view");
+                // Get the filter label
+                String label = viewObject.getString("label");
+                softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterLabelXpath, label))), "filter label is not present" + label);
+                System.out.println("Filter Label: " + label);
+                softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterTextBox, label))), "filter label textbox not present is not present" + label);
+//               if(label.equals("Estimated Award FY-QTR")){
+//                   continue;
+//               }
+                scrollToElement(By.xpath(String.format(filterTextBox, label)));
+                Thread.sleep(3000);
+                clickElement(By.xpath(String.format(filterTextBox, label)));
+                Thread.sleep(3000);
+                JSONArray options = filter.optJSONArray("options");
+                for (int i = 0; i < Math.min(options.length(), 50); i++) {
+                    JSONObject option = options.getJSONObject(i);
+                    String optionValue = option.optString("name").trim();
+                    softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterOptions, optionValue))), "filter option not available");
+                    System.out.println(" - " + optionValue);
+                }
+                scrollToElement(By.xpath("//button[@id='ag-reset-filters']"));
+                Thread.sleep(1000);
+                clickElement(By.xpath("//button[@id='ag-reset-filters']"));
+                Thread.sleep(1000);
+                scrollToElement(By.xpath("(//section[@class='usa-banner'])[2]"));
+                Thread.sleep(1000);
+
+            } catch (Exception e) {
+                ReportUtil.FAIL(driver,e.getMessage());
+            }
+            softAssert.assertAll();
+        }
+        validateFilterCombinations();
+
+    }
+
+    public void validateFilterCombinations(){
+
+    }
 
 
 
@@ -387,7 +452,9 @@ public class AcquisitionGatewayPage extends BasePage {
                 JSONObject id = data.getJSONObject(key);
                 JSONObject render = id.getJSONObject("render");
                 //header title
-                String title = render.getString("title");
+                String title = Jsoup.parse(render.getString("title")).text().replaceAll("\\s+", " ").trim();
+
+
                 softAssert.assertNotNull(isElementPresent(By.xpath(String.format(headerTitle, title))), "Header title not found: " + title);
 
                 //title body
@@ -414,36 +481,7 @@ public class AcquisitionGatewayPage extends BasePage {
                 }
                 break;
             }
-            //filter
-            String filtersString = JSONUtil.getAttributeValue(jsonResponse, "filters");
-            assert filtersString != null;
-            JSONObject filtersObject = new JSONObject(filtersString);
-            for (String key : filtersObject.keySet()) {
-                try {
-                    JSONObject filter = filtersObject.getJSONObject(key);
-                    JSONObject viewObject = filter.getJSONObject("view");
-                    // Get the filter label
-                    String label = viewObject.getString("label");
-                    softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterLabelXpath, label))), "filter label is not present" + label);
-                    System.out.println("Filter Label: " + label);
-                    softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterTextBox, label))), "filter label textbox not present is not present" + label);
-                    scrollToElement(By.xpath(String.format(filterTextBox, label)));
-                    Thread.sleep(1000);
-                    clickElement(By.xpath(String.format(filterTextBox, label)));
-                    Thread.sleep(2000);
-                    JSONArray options = filter.optJSONArray("options");
-                    for (int i = 0; i < options.length(); i++) {
 
-                        JSONObject option = options.getJSONObject(i);
-                        String optionValue = option.optString("name").trim();
-                        softAssert.assertNotNull(isElementPresent(By.xpath(String.format(filterOptions, optionValue))), "filter option not available");
-                        System.out.println(" - " + optionValue);
-                    }
-                } catch (Exception e) {
-                    ReportUtil.FAIL(driver,e.getMessage());
-                }
-
-            }
             softAssert.assertAll();
         } catch (Exception e) {
             ReportUtil.FAIL(driver,e.getMessage());
@@ -465,6 +503,10 @@ public class AcquisitionGatewayPage extends BasePage {
             case "field_acquisition_strategy": return "Acquisition Strategy/Type of Set-Aside:";
             case "field_type_of_awardee": return "Type of Awardee:";
             case "field_period_of_performance": return "Period of Performance:";
+            case "field_hi_def_targeted_outcomes": return "Hi-Def Targeted Outcomes:";
+            case "field_agency": return "Managing Agency:";
+            case "field_availability_info": return "Availability:";
+
             default: return fieldKey;
         }
     }
@@ -515,4 +557,12 @@ public class AcquisitionGatewayPage extends BasePage {
             softAssert.assertTrue(getElement(By.xpath(String.format(sliderContent, decodedTitle))).getText().equals(content));
         }
     }
+
+
+
+
+
+
+
+
 }

@@ -5,11 +5,8 @@ import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.testng.Assert;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -164,6 +161,26 @@ public class JSONUtil {
             return true;
         } catch (Exception ex) {
             return false;
+        }
+    }
+
+    public static JSONArray readTemplateData(String templateName) {
+        try {
+            String separator = File.separator;
+            String filepath =  System.getProperty("user.dir")+"\\src\\main\\resources\\template.json";
+
+            String content = new String(Files.readAllBytes(Paths.get(filepath.replace("\\",separator))));
+            JSONObject jsonObject = new JSONObject(content);
+
+            if (jsonObject.has(templateName)) {
+                return jsonObject.getJSONArray(templateName);
+            } else {
+                System.out.println("Template not found: " + templateName);
+                return null;
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
