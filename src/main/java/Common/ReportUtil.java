@@ -98,7 +98,7 @@ public class ReportUtil {
 
     public static void FAIL(WebDriver driver, String message) {
         try {
-            test.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver)).build());
+            test.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
         } catch (IOException e) {
             e.printStackTrace();
         }

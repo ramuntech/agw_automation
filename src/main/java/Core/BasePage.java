@@ -52,14 +52,15 @@ public class BasePage {
 
     //locator
 
-    public <T extends BasePage> T selectMenuOption(String menuTitle, String optionTitle, Class cls) {
+    public <T extends BasePage> T selectMenuOption(String menuTitle, String optionTitle, Class cls) throws InterruptedException {
+        Thread.sleep(2000);
         String locator = String.format(menu, menuTitle);
         scrollToElement(By.xpath(locator));
+        Thread.sleep(1000);
         clickElement(By.xpath(locator));
         ReportUtil.INFO("Clicked on Menu: " + menuTitle);
 
         locator = String.format(menuOpiton, optionTitle);
-        scrollToElement(By.xpath(locator));
         clickElement(By.xpath(locator));
         ReportUtil.INFO("Clicked on Menu Option: " + optionTitle);
         return getGenericObject(cls);

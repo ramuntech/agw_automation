@@ -10,21 +10,27 @@ import org.testng.annotations.Test;
 
 public class TemplateTest extends BaseTest {
 
+    private String menu;
+
     @Test(testName = "Validate Category Management")
     public void validateCollectionTemplate() throws InterruptedException {
         ReportUtil.addTestToReport("Collection Template");
         //read menu list from file for the selected template
-        JSONArray jsonArray =JSONUtil.readTemplateData("collection");
+        JSONArray jsonArray = JSONUtil.readTemplateData("collection");
         //verify all menus page content
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject eachMenu = jsonArray.getJSONObject(i);
-            String menu = eachMenu.optString("menu");
-            String option = eachMenu.optString("option");
-            String endpoint = eachMenu.optString("endpoint");
-            HomePage homePage = new HomePage(driver);
-            homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
-            TemplateHelper templateHelper = new TemplateHelper(driver);
-            templateHelper.validatePageVsTemplate(endpoint);
+            try {
+                JSONObject eachMenu = jsonArray.getJSONObject(i);
+                String menu = eachMenu.optString("menu");
+                String option = eachMenu.optString("option");
+                String endpoint = eachMenu.optString("endpoint");
+                HomePage homePage = new HomePage(driver);
+                homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
+                TemplateHelper templateHelper = new TemplateHelper(driver);
+                templateHelper.validatePageVsTemplate(endpoint);
+            } catch (Exception ex) {
+                ReportUtil.FAIL(driver, ex.getMessage());
+            }
         }
     }
 
@@ -32,17 +38,21 @@ public class TemplateTest extends BaseTest {
     public void validateResultTemplate() throws InterruptedException {
         ReportUtil.addTestToReport("result Template");
         //read menu list from file for the selected template
-        JSONArray jsonArray =JSONUtil.readTemplateData("result");
+        JSONArray jsonArray = JSONUtil.readTemplateData("result");
         //verify all menus page content
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject eachMenu = jsonArray.getJSONObject(i);
-            String menu = eachMenu.optString("menu");
-            String option = eachMenu.optString("option");
-            String endpoint = eachMenu.optString("endpoint");
-            HomePage homePage = new HomePage(driver);
-            homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
-            TemplateHelper templateHelper = new TemplateHelper(driver);
-            templateHelper.validatePageVsTemplate(endpoint);
+            try {
+                JSONObject eachMenu = jsonArray.getJSONObject(i);
+                String menu = eachMenu.optString("menu");
+                String option = eachMenu.optString("option");
+                String endpoint = eachMenu.optString("endpoint");
+                HomePage homePage = new HomePage(driver);
+                homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
+                TemplateHelper templateHelper = new TemplateHelper(driver);
+                templateHelper.validatePageVsTemplate(endpoint);
+            } catch (Exception ex) {
+                ReportUtil.FAIL(driver, ex.getMessage());
+            }
         }
     }
 
@@ -50,17 +60,21 @@ public class TemplateTest extends BaseTest {
     public void validatePortfolioTemplate() throws InterruptedException {
         ReportUtil.addTestToReport("portfolio Template");
         //read menu list from file for the selected template
-        JSONArray jsonArray =JSONUtil.readTemplateData("portfolio");
+        JSONArray jsonArray = JSONUtil.readTemplateData("portfolio");
         //verify all menus page content
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject eachMenu = jsonArray.getJSONObject(i);
-            String menu = eachMenu.optString("menu");
-            String option = eachMenu.optString("option");
-            String endpoint = eachMenu.optString("endpoint");
-            HomePage homePage = new HomePage(driver);
-            homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
-            TemplateHelper templateHelper = new TemplateHelper(driver);
-            templateHelper.validatePageVsTemplate(endpoint);
+            try {
+                JSONObject eachMenu = jsonArray.getJSONObject(i);
+                String menu = eachMenu.optString("menu");
+                String option = eachMenu.optString("option");
+                String endpoint = eachMenu.optString("endpoint");
+                HomePage homePage = new HomePage(driver);
+                homePage.selectMenuOption(menu, option, AcquisitionGatewayPage.class);
+                TemplateHelper templateHelper = new TemplateHelper(driver);
+                templateHelper.validatePageVsTemplate(endpoint);
+            } catch (Exception ex) {
+                ReportUtil.FAIL(driver, ex.getMessage());
+            }
         }
     }
 }

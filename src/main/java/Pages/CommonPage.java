@@ -166,11 +166,6 @@ public class CommonPage extends BasePage {
     }
   }
 
-
-
-
-
-
   public JSONObject captureResponseFromDevTools(String endpoint) throws InterruptedException {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(header)));
@@ -213,8 +208,6 @@ public class CommonPage extends BasePage {
 
     return capturedResponse.get();
   }
-
-
 
   public void validateEachSubMenu() throws IOException, InterruptedException {
 
@@ -284,12 +277,6 @@ public class CommonPage extends BasePage {
     }
   }
 
-
-
-
-
-
-
 //
 //
 //  public void validateForecast() throws IOException, InterruptedException {
@@ -305,9 +292,4 @@ public class CommonPage extends BasePage {
 //
 //
 //  }
-
-
-
-
-
 }
