@@ -14,6 +14,9 @@ public class TemplateHelper {
     public void validatePageVsTemplate(String endpoint) throws InterruptedException {
         CommonPage commonPage = new CommonPage(driver);
         JSONObject response = commonPage.captureResponseFromDevTools(endpoint);
+        if(response == null){
+            response = commonPage.captureResponseFromDevTools(endpoint);
+        }
         AcquisitionGatewayPage acquisitionGatewayPage = new AcquisitionGatewayPage(driver,response);
         acquisitionGatewayPage.verifyBannerAttr();
         acquisitionGatewayPage.verifyTitleAttr();

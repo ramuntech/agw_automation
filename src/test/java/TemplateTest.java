@@ -63,10 +63,4 @@ public class TemplateTest extends BaseTest {
             templateHelper.validatePageVsTemplate(endpoint);
         }
     }
-
-
-
-
-
-
 }

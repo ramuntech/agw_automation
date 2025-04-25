@@ -34,6 +34,7 @@ public class ReportUtil {
     List<String> testNames = new ArrayList<>();
     private static WebDriver driver = null;
     private static String reportFolderPath = null;
+    private static final String separator = File.separator;
 
     public ReportUtil() {
 
@@ -41,7 +42,8 @@ public class ReportUtil {
 
     public void initializeReport(String env, String reportName) {
         //createReportFolder();
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "\\Reports\\" + env + "_" + reportName + "_" + getDateTimeString() + ".html");
+        String filePath = System.getProperty("user.dir") + "\\Reports\\" + env + "_" + reportName + "_" + getDateTimeString() + ".html";
+        htmlReporter = new ExtentHtmlReporter(filePath.replace("\\",separator));
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         htmlReporter.config().setChartVisibilityOnOpen(true);
@@ -115,7 +117,7 @@ public class ReportUtil {
     }
 
     public static String takeScreenShot(WebDriver driver) {
-        String file = System.getProperty("user.dir") + "\\Reports\\" + "Screenshots\\" + getDateTimeString() + ".jpg";
+        String file = System.getProperty("user.dir") + "\\Reports\\Screenshots\\" + getDateTimeString() + ".jpg";
         try {
             TakesScreenshot scrShot = ((TakesScreenshot) driver);
 
@@ -124,7 +126,7 @@ public class ReportUtil {
             File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
             // Move image file to new destination
-            File DestFile = new File(file);
+            File DestFile = new File(file.replace("\\",separator));
 
             // Copy file at destination
 

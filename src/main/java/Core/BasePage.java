@@ -54,10 +54,12 @@ public class BasePage {
 
     public <T extends BasePage> T selectMenuOption(String menuTitle, String optionTitle, Class cls) {
         String locator = String.format(menu, menuTitle);
+        scrollToElement(By.xpath(locator));
         clickElement(By.xpath(locator));
         ReportUtil.INFO("Clicked on Menu: " + menuTitle);
 
         locator = String.format(menuOpiton, optionTitle);
+        scrollToElement(By.xpath(locator));
         clickElement(By.xpath(locator));
         ReportUtil.INFO("Clicked on Menu Option: " + optionTitle);
         return getGenericObject(cls);
